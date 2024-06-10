@@ -39,3 +39,8 @@ class CategoryForm(forms.ModelForm):
     class Meta:
         model = Category
         fields = ['name']
+
+class NewsForm(forms.ModelForm):
+    class Meta:
+        model = News
+        fields = "__all__"

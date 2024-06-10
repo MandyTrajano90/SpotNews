@@ -1,5 +1,5 @@
 from django.shortcuts import redirect, render
-from .models import News, Category, CategoryForm
+from .models import News, Category, CategoryForm, NewsForm, User
 
 
 def home(request):
@@ -23,3 +23,24 @@ def categories_form(request):
         form = CategoryForm()
 
     return render(request, "categories_form.html", {"form": form})
+
+def news_form(request):
+    categories = Category.objects.all()
+    news_authors = User.objects.all()
+
+    if request.method == "POST":
+        form = NewsForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+
+            return redirect("home-page")
+    else:
+        form = NewsForm()
+    
+    news_context = {
+        "form": form,
+        "categories": categories,
+        "authors": news_authors
+    }
+
+    return render(request, "news_form.html", news_context)
