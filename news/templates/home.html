@@ -1,34 +1,20 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends 'base.html' %}
 
-{% load static %}
+{%load static%}
+{% block title %}
+Página Inicial
+{% endblock %}
 
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Página Inicial</title>
-  <link rel="stylesheet" href="{% static 'css/style.css' %}">
-</head>
-
-<body>
-  <header class="header">
-    <ul class="header-links">
-      <li><a href="{% url 'home-page' %}">Home</a></li>
-    </ul>
-  </header>
-
+{% block content %}
   <main>
     {% for news in news %}
     <a href="{% url 'news-details-page' news.id %}">
-      <div>
+      <div class="news-card">
         <h2 class="news-title">{{ news.title }}</h2>
         <span class="news-date">{{ news.created_at | date:"d/m/Y" }}</span>
         <img class="news-image" src="{% static news.image.url %}" alt="{{ news.title }}">
       </div>
     </a>
-      {% endfor %}
+    {% endfor %}
   </main>
-</body>
-
-</html>
+{% endblock %}
