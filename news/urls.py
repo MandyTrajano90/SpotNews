@@ -1,9 +1,10 @@
 from django.urls import path, include
-from .views import home, news_details, categories_form, news_form, Category_ViewSet
+from .views import home, news_details, categories_form, news_form, Category_ViewSet, User_ViewSet
 from rest_framework import routers
 
 router = routers.DefaultRouter()
 router.register(r'categories', Category_ViewSet)
+router.register(r'users', User_ViewSet)
 
 
 urlpatterns = [
